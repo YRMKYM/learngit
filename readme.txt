@@ -1,38 +1,42 @@
 Git is a version control system.
 Git is free software.
 
-һ����ʼ��һ��Git�ֿ⣬ʹ��git init���
+一、初始化一个Git仓库，使用git init命令。
 
-  �����ļ���Git�ֿ⣬��������
+  添加文件到Git仓库，分两步：
 
-  ��һ����ʹ������git add <file>��ע�⣬�ɷ������ʹ�ã����Ӷ���ļ���
+  第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
 
-  �ڶ�����ʹ������git commit����ɡ�
+  第二步，使用命令git commit，完成。
 
-����Ҫ��ʱ���չ�������״̬��ʹ��git status���
+二、要随时掌握工作区的状态，使用git status命令。
 
-  ���git status���������ļ����޸Ĺ�����git diff���Բ鿴�޸����ݡ�
+  如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
 
-����HEADָ��İ汾���ǵ�ǰ�汾����ˣ�Git���������ڰ汾����ʷ֮�䴩��ʹ������git reset --hard commit_id��
+三、HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
 
-  ����ǰ����git log���Բ鿴�ύ��ʷ���Ա�ȷ��Ҫ���˵��ĸ��汾��
+  穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 
-  Ҫ�ط�δ������git reflog�鿴������ʷ���Ա�ȷ��Ҫ�ص�δ�����ĸ��汾��
+  要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
 
-�ġ�����1����������˹�����ĳ���ļ������ݣ���ֱ�Ӷ������������޸�ʱ��������git checkout -- file��
+四、场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
 
-  ����2�����㲻�������˹�����ĳ���ļ������ݣ������ӵ����ݴ���ʱ���붪���޸ģ�����������һ��������git reset HEAD file���ͻص��˳���1���ڶ���������1������
+  场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
 
-  ����3���Ѿ��ύ�˲����ʵ��޸ĵ��汾��ʱ����Ҫ���������ύ���ο��汾����һ�ڣ�����ǰ����û�����͵�Զ�̿⡣
+  场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
 
-�塢����git rm����ɾ��һ���ļ������һ���ļ��Ѿ����ύ���汾�⣬��ô����Զ���õ�����ɾ������ҪС�ģ���ֻ�ָܻ��ļ������°汾����ᶪʧ���һ���ύ�����޸ĵ����ݡ�
+五、命令git rm用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
 
-  git checkout��ʵ���ð汾����İ汾�滻�������İ汾�����۹��������޸Ļ���ɾ���������ԡ�һ����ԭ����
+  git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
-����Ҫ����һ��Զ�̿⣬ʹ������git remote add origin git@server-name:path/repo-name.git��
+六、要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
 
-  ������ʹ������git push -u origin master��һ������master��֧���������ݣ�
+  关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
 
-  �˺�ÿ�α����ύ��ֻҪ�б�Ҫ���Ϳ���ʹ������git push origin master���������޸ģ�
+  此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 
-  �ֲ�ʽ�汾ϵͳ�����ô�֮һ���ڱ��ع�����ȫ����Ҫ����Զ�̿�Ĵ��ڣ�Ҳ������û������������������������SVN��û��������ʱ���Ǿܾ��ɻ�ģ����������ʱ���ٰѱ����ύ����һ�¾������ͬ��������̫�����ˣ�
+  分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
+  
+七、要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+
+  Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
